@@ -1,6 +1,6 @@
 export abstract class Palette {
 
     name: string;
-    values: number[];
+    values: {r:number, g:number, b:number}[];
 
 }

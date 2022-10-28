@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FractalRenderService } from './fractal-render.service';
+import { FractalRenderService } from '../services/fractal-render.service';
 
 describe('FractalRenderService', () => {
   let service: FractalRenderService;

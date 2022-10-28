@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
-import { FractalVisualizerComponent } from 'src/app/core/fractal-visualizer/fractal-visualizer.component';
+import { FractalDisplayComponent } from 'src/app/pages/fractal-display/fractal-display.component';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     HomeComponent,
-    FractalVisualizerComponent
+    FractalDisplayComponent
   ],
   imports: [
     CommonModule,

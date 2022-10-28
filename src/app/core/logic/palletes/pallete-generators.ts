@@ -2,17 +2,13 @@ import { Palette } from "./pallete.model";
 
 export class PaletteGenerators {
 
-    private static getColor(r: number, g: number, b: number) {
-        return (255 << 24) | (r << 16) | (g << 8) | b;
-    }
-
-    static RedPaletteGenerator(): number[] {
+    static RedPaletteGenerator(): { r: number, g: number, b: number }[] {
         let palette = [];
         let roffset = 24;
         let goffset = 0;
         let boffset = 16;
         for (let i = 0; i < 256; i++) {
-            palette[i] = PaletteGenerators.getColor(roffset, goffset, boffset);
+            palette[i] = { r: roffset, g: goffset, b: boffset };
             if (i < 64) {
                 roffset += 3;
             } else if (i < 128) {
@@ -24,13 +20,13 @@ export class PaletteGenerators {
         return palette;
     }
 
-    static BluePaletteGenerator(): number[] {
+    static BluePaletteGenerator(): { r: number, g: number, b: number }[] {
         let palette = [];
         let roffset = 16;
         let goffset = 0;
         let boffset = 24;
         for (let i = 0; i < 256; i++) {
-            palette[i] = PaletteGenerators.getColor(roffset, goffset, boffset);
+            palette[i] = { r: roffset, g: goffset, b: boffset };
             if (i < 64) {
                 boffset += 3;
             } else if (i < 128) {
@@ -42,13 +38,13 @@ export class PaletteGenerators {
         return palette;
     }
 
-    static GreenPaletteGenerator(): number[] {
+    static GreenPaletteGenerator(): { r: number, g: number, b: number }[] {
         let palette = [];
         let roffset = 0;
         let goffset = 16;
         let boffset = 24;
         for (let i = 0; i < 256; i++) {
-            palette[i] = PaletteGenerators.getColor(roffset, goffset, boffset);
+            palette[i] = { r: roffset, g: goffset, b: boffset };
             if (i < 64) {
                 goffset += 3;
             } else if (i < 128) {
@@ -60,24 +56,27 @@ export class PaletteGenerators {
         return palette;
     }
 
-    static GreyPaletteGenerator(): number[] {
+    static GreyPaletteGenerator(): { r: number, g: number, b: number }[] {
         let palette = [];
         let roffset = 0;
         let goffset = 16;
         let boffset = 24;
         for (let i = 0; i < 192; i++) {
-            palette[i] = PaletteGenerators.getColor(roffset++, goffset++, boffset++);
+            palette[i] = { r: roffset, g: goffset, b: boffset };
+            roffset += 1;
+            goffset += 1;
+            boffset += 1;
         }
         return palette;
     }
 
-    static PurplePaletteGenerator(): number[] {
+    static PurplePaletteGenerator(): { r: number, g: number, b: number }[] {
         let palette = [];
         let roffset = 16;
         let goffset = 0;
         let boffset = 24;
         for (let i = 0; i < 256; i++) {
-            palette[i] = PaletteGenerators.getColor(roffset, goffset, boffset);
+            palette[i] = { r: roffset, g: goffset, b: boffset };
             if (i < 64) {
                 roffset += 1;
                 boffset += 2.5;
@@ -87,24 +86,6 @@ export class PaletteGenerators {
             } else if (i < 192) {
                 boffset += 1;
                 goffset += 2.5;
-            }
-        }
-        return palette;
-    }
-
-    static RainbowPaletteGenerator(): number[] {
-        let palette = [];
-        let roffset = 16;
-        let goffset = 0;
-        let boffset = 24;
-        for (let i = 0; i < 256; i++) {
-            palette[i] = PaletteGenerators.getColor(roffset, goffset, boffset);
-            if (i < 64) {
-                roffset += 3;
-            } else if (i < 128) {
-                goffset += 3;
-            } else if (i < 192) {
-                boffset += 3;
             }
         }
         return palette;

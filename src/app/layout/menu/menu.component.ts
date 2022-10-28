@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { Fractal } from 'src/app/core/logic/fractals/fractal.model';
+import { MandelbrotFractals } from 'src/app/core/logic/fractals/mandelbrot-fractals';
+import { ColorPalettes } from 'src/app/core/logic/palletes/color-palletes';
+import { Palette } from 'src/app/core/logic/palletes/pallete.model';
+import { FractalRenderService } from 'src/app/core/services/fractal-render.service';
 
 @Component({
   selector: 'app-menu',
@@ -10,7 +15,9 @@ export class MenuComponent implements OnInit {
 
   items: MenuItem[] = [];
 
-  constructor() { }
+  constructor(
+    private fractalRenderService: FractalRenderService
+  ) { }
 
   ngOnInit() {
     this.items = [
@@ -20,52 +27,60 @@ export class MenuComponent implements OnInit {
         routerLink: '/'
       },
       {
-        label: 'Experiencia',
-        icon: 'pi pi-fw pi-briefcase',
-        expanded: true,
-        items: [
-          {
-            label: 'ATOS',
-            icon: 'pi pi-fw pi-building',
-            expanded: true,
-            items: [
-              {
-                label: 'Desarrollador full stack',
-                icon: 'pi pi-fw pi-caret-up',
-              },
-              {
-                label: 'Desarrollador front end',
-                icon: 'pi pi-fw pi-caret-up',
-              },
-              {
-                label: 'Prácticas',
-                icon: 'pi pi-fw pi-verified',
-              }
-            ]
-          },
-          
-          {
-            label: 'Otros sectores',
-            items: [
-              {
-                label: 'ALESKA',
-                icon: 'pi pi-fw pi-home',
-              },
-              {
-                label: 'FAMILY SHOPPER',
-                icon: 'pi pi-fw pi-pound',
-              }
-            ]
-          }
-          
-
-        ]
+        label: 'Fractales',
+        items: []
       },
-      { label: 'Educación', icon: 'pi pi-fw pi-book' },
-      { label: 'Inglés', icon: 'pi pi-fw pi-language' },
-      { label: 'Certificados', icon: 'pi pi-fw pi-id-card' },
-      { label: 'Habilidades personales', icon: 'pi pi-fw pi-arrows-alt' },
+      {
+        label: 'Color',
+        items: []
+      }
     ];
+
+    this.loadFractals();
+    this.loadPalettes();
+  }
+
+  loadFractals() {
+    this.items[1].items.push(
+      {
+        label: 'Mandelbrot',
+        items: []
+      },
+      {
+        label: 'Burning Ship',
+        items: []
+      },
+      {
+        label: 'Mandelbar',
+        items: []
+      }
+    );
+
+    let fractales: Fractal[] = MandelbrotFractals.fractals;
+    for (let fractal of fractales) {
+      for (let item of this.items[1].items) {
+        if (fractal.name.includes(item.label)) {
+          item.items.push({
+            label: fractal.name,
+            command: (event) => {
+              this.fractalRenderService.setFractal(fractal);
+            }
+          })
+        }
+      }
+    }
+  }
+
+  loadPalettes() {
+    let palletes: Palette[] = ColorPalettes.palettes;
+    for (let palette of palletes) {
+      this.items[2].items.push({
+        label: palette.name,
+        command: (event) => {
+          this.fractalRenderService.setPalette(palette);
+        }
+      });
+    }
   }
 
 }

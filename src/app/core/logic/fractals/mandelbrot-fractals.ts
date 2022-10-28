@@ -109,4 +109,19 @@ export class MandelbrotFractals {
         zreal: (a: number, b: number) => a * a * a * a - 6 * a * a * b * b + b * b * b * b,
         zimag: (a: number, b: number) => -4 * Math.abs(a * a * a * b) + 4 * Math.abs(a * b * b * b)
     };
+
+    public static fractals: Fractal[] = [
+        MandelbrotFractals.mandelbrot,
+        MandelbrotFractals.burningShip,
+        MandelbrotFractals.mandelbar,
+        MandelbrotFractals.burningShipBar,
+        MandelbrotFractals.mandelbrot3,
+        MandelbrotFractals.burningShip3,
+        MandelbrotFractals.mandelbar3,
+        MandelbrotFractals.burningShipBar3,
+        MandelbrotFractals.mandelbrot4,
+        MandelbrotFractals.burningShip4,
+        MandelbrotFractals.mandelbar4,
+        MandelbrotFractals.burningShipBar4
+    ];
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FractalRenderService } from './core/fractal-visualizer/fractal-render.service';
+import { FractalRenderService } from './core/services/fractal-render.service';
 
 @Component({
   selector: 'app-root',

@@ -1,14 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Fractal } from '../logic/fractals/fractal.model';
-import { MandelbrotFractals } from '../logic/fractals/mandelbrot-fractals';
-import { FractalRenderService } from './fractal-render.service';
+import { FractalRenderService } from 'src/app/core/services/fractal-render.service';
 
 @Component({
-  selector: 'app-fractal-visualizer',
-  templateUrl: './fractal-visualizer.component.html',
-  styleUrls: ['./fractal-visualizer.component.sass']
+  selector: 'app-fractal-display',
+  templateUrl: './fractal-display.component.html',
+  styleUrls: ['./fractal-display.component.sass']
 })
-export class FractalVisualizerComponent implements OnInit {
+export class FractalDisplayComponent implements OnInit {
 
   @ViewChild('display', { static: true }) display: ElementRef;
 

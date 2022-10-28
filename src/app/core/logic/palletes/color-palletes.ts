@@ -27,17 +27,11 @@ export class ColorPalettes {
         values: PaletteGenerators.PurplePaletteGenerator()
     };
 
-    public static rainbowPalette: Palette = {
-        name: "Rainbow",
-        values: PaletteGenerators.RainbowPaletteGenerator()
-    };
-
     public static palettes: Palette[] = [
         ColorPalettes.redPalette,
         ColorPalettes.bluePalette,
         ColorPalettes.greenPalette,
         ColorPalettes.greyPalette,
-        ColorPalettes.purplePalette,
-        ColorPalettes.rainbowPalette
+        ColorPalettes.purplePalette
     ];
 }

@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Fractal } from '../logic/fractals/fractal.model';
 import { MandelbrotFractals } from '../logic/fractals/mandelbrot-fractals';
+import { ColorPalettes } from '../logic/palletes/color-palletes';
+import { Palette } from '../logic/palletes/pallete.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FractalRenderService {
 
-  fractal: Fractal = MandelbrotFractals.burningShip3;
+  fractal: Fractal = MandelbrotFractals.mandelbrot;
+  palette: Palette = ColorPalettes.redPalette;
 
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
@@ -22,7 +25,7 @@ export class FractalRenderService {
 
   constructor() { }
 
-  setCanvas(canvas: HTMLCanvasElement, width:number, height:number): void {
+  setCanvas(canvas: HTMLCanvasElement, width: number, height: number): void {
     this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
     this.width = width;
@@ -37,6 +40,18 @@ export class FractalRenderService {
     window.addEventListener('keydown', (event) => { this.onKeyPress(event) }, true);
   }
 
+  setFractal(fractal: Fractal): void {
+    this.fractal = fractal;
+    this.movx = fractal.x;
+    this.movy = fractal.y;
+    this.zoom = fractal.zoom;
+    this.draw(this.movx, this.movy, this.zoom);
+  }
+
+  setPalette(palette: Palette) {
+    this.palette = palette;
+    this.draw(this.movx, this.movy, this.zoom);
+  }
 
   mapPosition(num: number, inmin: number, inmax: number, outmin: number, outmax: number): number {
     return (num - inmin) * (outmax - outmin) / (inmax - inmin) + outmin;
@@ -92,30 +107,11 @@ export class FractalRenderService {
     this.draw(this.movx, this.movy, this.zoom);
   }
 
-  generatePalette(): { r: number, g: number, b: number }[] {
-    var palette = [];
-    var roffset = 24;
-    var goffset = 0;
-    var boffset = 16;
-    for (var i = 0; i < 256; i++) {
-      palette[i] = { r: roffset, g: goffset, b: boffset };
-
-      if (i < 64) {
-        roffset += 3;
-      } else if (i < 128) {
-        goffset += 3;
-      } else if (i < 192) {
-        boffset += 3;
-      }
-    }
-    return palette;
-  }
-
   draw(xmov: number, ymov: number, zoom: number) {
     var max_iterations = 100;
     var iterator = 0.3;
 
-    var palette = this.generatePalette();
+    var palette = this.palette.values;
 
     var imagedata = this.ctx.createImageData(this.width, this.height);
     var pixels = imagedata.data;
