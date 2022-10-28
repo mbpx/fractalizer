@@ -20,15 +20,44 @@
 ::ng-deep .sidebar .p-sidebar-header
     display: none
 
-.sidebar .sidebar-content
-    position: fixed
-    width: 20rem
-    height: 100%
-    padding: 2rem 1rem
+::ng-deep .sidebar .p-sidebar-content
+    padding: 0
 
-    
+.sidebar
+
+    .sidebar-content
+        display: inline-grid
+        overflow: auto
+        position: fixed
+        width: 20rem
+        height: calc( 100% - 5rem)
+        padding: 0.5rem
+
+        background-color: #3d3d3d
+        opacity: 0.8
+        background-image: repeating-radial-gradient( circle at 0 0, transparent 0, #3d3d3d 10px ), repeating-linear-gradient( #00000055, #000000 )
+        
+        .sidebar-footer
+            position: initial
+            top: 0
+            bottom: 0
+            left: auto
+            right: auto
+            padding: 0.5rem
+            padding-top: 1rem
+            font-size: 0.8rem
+            color: darkgray
+            font-family: 'Courier New', Courier, monospace
+            display: flex
+            justify-content: end
+            align-items: end
+
+            a
+                color: darkgray
+
 .app-body
     display: flex
+    overflow: hidden
     position: relative
     top: 5rem
     left: 0

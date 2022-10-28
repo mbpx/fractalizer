@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "curriculum-vitae": {
+        "mandelbrot-angular": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/curriculum-vitae",
+                        "outputPath": "dist/mandelbrot-angular",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -40,8 +40,8 @@
                         "production": {
                             "budgets": [{
                                     "type": "initial",
-                                    "maximumWarning": "500kb",
-                                    "maximumError": "1mb"
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "4mb"
                                 },
                                 {
                                     "type": "anyComponentStyle",
@@ -70,10 +70,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "curriculum-vitae:build:production"
+                            "browserTarget": "mandelbrot-angular:build:production"
                         },
                         "development": {
-                            "browserTarget": "curriculum-vitae:build:development"
+                            "browserTarget": "mandelbrot-angular:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "curriculum-vitae:build"
+                        "browserTarget": "mandelbrot-angular:build"
                     }
                 },
                 "test": {
@@ -106,6 +106,6 @@
         }
     },
     "cli": {
-      "analytics": false
+        "analytics": false
     }
 }

@@ -13,8 +13,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { SidebarModule } from 'primeng/sidebar';
 import { ToastModule } from 'primeng/toast';
 import { SplitButtonModule } from 'primeng/splitbutton';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MenuModule } from 'primeng/menu';
+import {PanelMenuModule} from 'primeng/panelmenu';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
 
@@ -36,8 +38,10 @@ import { ConfirmationService } from 'primeng/api';
         SidebarModule,
         ToastModule,
         SplitButtonModule,
+        MenuModule,
+        PanelMenuModule,
         BrowserModule,
-        BrowserAnimationsModule
+        NoopAnimationsModule
     ],
     exports: [
         ToolbarModule,
@@ -54,8 +58,10 @@ import { ConfirmationService } from 'primeng/api';
         SidebarModule,
         ToastModule,
         SplitButtonModule,
+        MenuModule,
+        PanelMenuModule,
         BrowserModule,
-        BrowserAnimationsModule
+        NoopAnimationsModule
     ]
 })
 export class PrimeNgModule { }

@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'curriculum-vitae'`, () => {
+  it(`should have as title 'mandelbrot-angular'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('curriculum-vitae');
+    expect(app.title).toEqual('mandelbrot-angular');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('curriculum-vitae app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('mandelbrot-angular app is running!');
   });
 });

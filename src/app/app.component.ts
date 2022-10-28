@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'curriculum-vitae';
+  title = 'mandelbrot-angular';
   displaySidebar = false;
-  
 }
