@@ -22,10 +22,11 @@ export class FractalRenderService {
 
   constructor() { }
 
-  setCanvas(canvas: HTMLCanvasElement): void {
+  setCanvas(canvas: HTMLCanvasElement, width:number, height:number): void {
+    this.canvas = canvas;
     this.ctx = canvas.getContext("2d");
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+    this.width = width;
+    this.height = width;
     this.sqmax = Math.max(this.width, this.height);
     this.offset = this.sqmax - Math.min(this.width, this.height);
     this.canvas.width = this.width;
@@ -36,21 +37,17 @@ export class FractalRenderService {
     window.addEventListener('keydown', (event) => { this.onKeyPress(event) }, true);
   }
 
-  
+
   mapPosition(num: number, inmin: number, inmax: number, outmin: number, outmax: number): number {
     return (num - inmin) * (outmax - outmin) / (inmax - inmin) + outmin;
   }
 
-  onClick(event: any) {
-    this.onZoomIn(event.clientX, event.clientY);
-    this.draw(this.movx, this.movy, this.zoom);
-  }
-
-  onZoomIn(x: number, y: number) {
+  zoomIn(x: number, y: number) {
     const zoomInRatio: number = 1.5;
     this.zoom = this.zoom * zoomInRatio;
     this.movx += this.mapPosition(x, 0, this.width, -2, 2) / this.zoom;
     this.movy += this.mapPosition(y, 0, this.height, -2, 2) / this.zoom;
+    this.draw(this.movx, this.movy, this.zoom);
   }
 
   onKeyPress(event: any) {
@@ -63,42 +60,36 @@ export class FractalRenderService {
       moveRatio *= 2;
     }
 
-    if (event.which == zoomOutKey) {
-      this.zoom = this.zoom / zoomOutRatio;
-    }
-
-    if (event.which == 37) {
-      this.movx -= moveRatio / this.zoom;
-    }
-
-    if (event.which == 38) {
-      this.movy -= moveRatio / this.zoom;
-    }
-
-    if (event.which == 39) {
-      this.movx += moveRatio / this.zoom;
-    }
-
-    if (event.which == 40) {
-      this.movy += moveRatio / this.zoom;
-    }
-
     if (event.which == zoomInKey) {
-      this.onZoomIn(this.width / 2, this.height / 3);
+      this.zoomIn(this.width / 2, this.height / 3);
+    } else {
+      if (event.which == zoomOutKey) {
+        this.zoom = this.zoom / zoomOutRatio;
+      }
+      if (event.which == 37) {
+        this.movx -= moveRatio / this.zoom;
+      }
+      if (event.which == 38) {
+        this.movy -= moveRatio / this.zoom;
+      }
+      if (event.which == 39) {
+        this.movx += moveRatio / this.zoom;
+      }
+      if (event.which == 40) {
+        this.movy += moveRatio / this.zoom;
+      }
+      this.draw(this.movx, this.movy, this.zoom);
     }
-
-    this.draw(this.movx, this.movy, this.zoom);
   }
 
-  onResize() {
-    this.width = window.innerWidth;
-    this.height = window.innerHeight;
+  resize(width: number, height: number): void {
+    this.width = width;
+    this.height = height;
     this.sqmax = Math.max(this.width, this.height);
     this.offset = this.sqmax - Math.min(this.width, this.height);
     this.canvas.width = this.width;
     this.canvas.height = this.height - 80;
     this.draw(this.movx, this.movy, this.zoom);
-    alert()
   }
 
   generatePalette(): { r: number, g: number, b: number }[] {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FractalRenderService } from './core/fractal-visualizer/fractal-render.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +10,20 @@ export class AppComponent {
 
   title = 'mandelbrot-angular';
   displaySidebar = false;
+
+  constructor(
+    private fractalRenderService: FractalRenderService
+  ) { }
+
+  showSidebar() {
+    this.displaySidebar = !this.displaySidebar;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+    if (this.displaySidebar) {
+      width -= 300;
+    }
+    this.fractalRenderService.resize(width, height);
+  }
+
+
 }
