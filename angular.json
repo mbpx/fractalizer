@@ -3,7 +3,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "mandelbrot-angular": {
+        "fractalizer": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -17,7 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/mandelbrot-angular",
+                        "outputPath": "dist/fractalizer",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -70,10 +70,10 @@
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "configurations": {
                         "production": {
-                            "browserTarget": "mandelbrot-angular:build:production"
+                            "browserTarget": "fractalizer:build:production"
                         },
                         "development": {
-                            "browserTarget": "mandelbrot-angular:build:development"
+                            "browserTarget": "fractalizer:build:development"
                         }
                     },
                     "defaultConfiguration": "development"
@@ -81,7 +81,7 @@
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "mandelbrot-angular:build"
+                        "browserTarget": "fractalizer:build"
                     }
                 },
                 "test": {

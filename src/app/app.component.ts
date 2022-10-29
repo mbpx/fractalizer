@@ -8,7 +8,7 @@ import { FractalRenderService } from './core/services/fractal-render.service';
 })
 export class AppComponent {
 
-  title = 'mandelbrot-angular';
+  title = 'fractalizer';
   displaySidebar = false;
 
   constructor(
