@@ -13,17 +13,22 @@ export class AppComponent {
 
   constructor(
     private fractalRenderService: FractalRenderService
-  ) { }
+  ) {
+    fractalRenderService.fractalRedraws.subscribe(() => {
+      this.title = fractalRenderService.fractal.name.toUpperCase();
+    });
+  }
 
   showSidebar() {
     this.displaySidebar = !this.displaySidebar;
-    let width = window.innerWidth;
+    /*let width = window.innerWidth;
     let height = window.innerHeight;
     if (this.displaySidebar) {
       width -= 300;
     }
-    this.fractalRenderService.resize(width, height);
+    this.fractalRenderService.resize(width, height);*/
   }
+
 
 
 }

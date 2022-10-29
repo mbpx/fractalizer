@@ -33,25 +33,52 @@ export class MenuComponent implements OnInit {
       {
         label: 'Color',
         items: []
+      },
+      {
+        label: 'Posición',
+        items: [
+          {
+            label: 'x: ',
+            icon: 'pi pi-fw pi-arrow-right',
+          },
+          {
+            label: 'y: ',
+            icon: 'pi pi-fw pi-align-up',
+          },
+          {
+            label: 'zoom: ',
+            icon: 'pi pi-fw pi-search',
+          }
+        ]
       }
     ];
 
     this.loadFractals();
     this.loadPalettes();
+
+    this.fractalRenderService.fractalRedraws.subscribe(() => {
+      this.items[3].items[0].label = 'x: ' + this.fractalRenderService.movx
+      this.items[3].items[1].label = 'y: ' + this.fractalRenderService.movy;
+      this.items[3].items[2].label = 'zoom: ' + this.fractalRenderService.zoom;
+      this.items = [...this.items];
+    });
   }
 
   loadFractals() {
     this.items[1].items.push(
       {
         label: 'Mandelbrot',
+        expanded: false,
         items: []
       },
       {
         label: 'Burning Ship',
+        expanded: false,
         items: []
       },
       {
         label: 'Mandelbar',
+        expanded: false,
         items: []
       }
     );

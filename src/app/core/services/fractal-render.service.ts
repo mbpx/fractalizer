@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Fractal } from '../logic/fractals/fractal.model';
 import { MandelbrotFractals } from '../logic/fractals/mandelbrot-fractals';
 import { ColorPalettes } from '../logic/palletes/color-palletes';
@@ -23,7 +24,14 @@ export class FractalRenderService {
   movx: number = -0.4;
   movy: number = 1;
 
+  private fractalRedrawsSubject = new Subject<boolean>();
+  public readonly fractalRedraws = this.fractalRedrawsSubject.asObservable();
+
   constructor() { }
+
+  setCanvasScalingFactor() {
+    return window.devicePixelRatio || 1;
+  }
 
   setCanvas(canvas: HTMLCanvasElement, width: number, height: number): void {
     this.canvas = canvas;
@@ -33,8 +41,12 @@ export class FractalRenderService {
     this.sqmax = Math.max(this.width, this.height);
     this.offset = this.sqmax - Math.min(this.width, this.height);
     this.canvas.width = this.width;
-    this.canvas.height = this.height - 80;
+    this.canvas.height = this.height;
     this.ctx.fillStyle = "#000000";
+
+    this.ctx.canvas.width = this.sqmax * this.setCanvasScalingFactor();
+    this.ctx.canvas.height = this.sqmax * this.setCanvasScalingFactor();
+    this.ctx.canvas.style.imageRendering = 'auto';
 
     this.draw(this.movx, this.movy, this.zoom);
     window.addEventListener('keydown', (event) => { this.onKeyPress(event) }, true);
@@ -51,6 +63,10 @@ export class FractalRenderService {
   setPalette(palette: Palette) {
     this.palette = palette;
     this.draw(this.movx, this.movy, this.zoom);
+  }
+
+  getPosition (): { x: number, y: number, zoom: number } {
+    return {x: this.movx, y: this.movy, zoom: this.zoom};
   }
 
   mapPosition(num: number, inmin: number, inmax: number, outmin: number, outmax: number): number {
@@ -103,7 +119,9 @@ export class FractalRenderService {
     this.sqmax = Math.max(this.width, this.height);
     this.offset = this.sqmax - Math.min(this.width, this.height);
     this.canvas.width = this.width;
-    this.canvas.height = this.height - 80;
+    this.canvas.height = this.height;
+    this.ctx.canvas.width = this.sqmax * this.setCanvasScalingFactor();
+    this.ctx.canvas.height = this.sqmax * this.setCanvasScalingFactor();
     this.draw(this.movx, this.movy, this.zoom);
   }
 
@@ -155,5 +173,6 @@ export class FractalRenderService {
       }
     }
     this.ctx.putImageData(imagedata, 0, 0);
+    this.fractalRedrawsSubject.next(true);
   }
 }

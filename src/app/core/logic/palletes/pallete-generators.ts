@@ -61,7 +61,7 @@ export class PaletteGenerators {
         let roffset = 0;
         let goffset = 16;
         let boffset = 24;
-        for (let i = 0; i < 192; i++) {
+        for (let i = 0; i < 256; i++) {
             palette[i] = { r: roffset, g: goffset, b: boffset };
             roffset += 1;
             goffset += 1;
